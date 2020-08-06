@@ -1,0 +1,15 @@
+{
+  "name": "Rodacoop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:levysam/Sistema-Rodacoop.git",
+  "author": "Levy <levyaraujo42@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
