@@ -10,10 +10,10 @@ const routes = new Router();
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
-routes.post('/centro_distribuicao', CentroDistribuicaoController.store);
 
 routes.use(authMiddleware);
 
+routes.post('/centro_distribuicao', CentroDistribuicaoController.store);
 routes.put('/users', UserController.update);
 
 export default routes;
