@@ -56,8 +56,14 @@ class UserController {
 
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
+    const cpfExists = await Pessoa.findOne({where: { cpf: req.body.cpf }})
+
     if (userExists) {
       return res.status(400).json({ error: 'User already exists.' });
+    }
+
+    if (cpfExists) {
+      return res.status(400).json({ error: 'CPF already exists' })
     }
     const { nome, cpf, id_pessoa } = await Pessoa.create(req.body);
     req.body.id_pessoa = id_pessoa
@@ -113,13 +119,12 @@ class UserController {
       return res.status(401).json({ error: 'Old password not provided' });
     }
 
-    const { id, name, provider } = await user.update(req.body);
+    const { id, name} = await user.update(req.body);
 
     return res.json({
       id,
       name,
       email,
-      provider,
     });
   }
 }
