@@ -15,14 +15,13 @@ class CentroDistribuicaoController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const CentroDistribuicaoExists = centro_distribuicao.findOne({ where: { identificador: req.body.identificador }});
+    const CentroDistribuicaoExists = await centro_distribuicao.findOne({ where: { identificador: req.body.identificador }});
 
     if (CentroDistribuicaoExists) {
       return res.status(400).json({ error: 'Centro de Distribuicao already exists' })
     }
 
     const {id_centro_distribuicao, identificador, uf } = await centro_distribuicao.create(req.body);
-
     return res.json({
       id_centro_distribuicao,
       identificador,

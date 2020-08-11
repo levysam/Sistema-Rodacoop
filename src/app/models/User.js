@@ -11,7 +11,6 @@ class User extends Model {
           primaryKey: true,
           autoIncrement: true
         },
-        id_pessoa: Sequelize.INTEGER,
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
@@ -29,6 +28,10 @@ class User extends Model {
     });
 
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Pessoa, {foreignKey: 'id_pessoa', as: 'pessoa'})
   }
 
   checkPassword(password) {

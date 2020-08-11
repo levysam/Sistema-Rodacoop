@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('centro_distribuicao', {
+    return queryInterface.createTable('centro_distribuicaos', {
       id_centro_distribuicao: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,13 +11,14 @@ module.exports = {
         unique: true
       },
       identificador :{
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(10),
         allowNull: false,
         unique: true
       },
       uf: {
         type: Sequelize.CHAR(2),
-        unique: true
+        unique: true,
+        allowNull: false
       },
       created_at: {
         type: Sequelize.DATE,
@@ -31,6 +32,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('centro_distribuicao');
+    return queryInterface.dropTable('centro_distribuicaos');
   }
 };

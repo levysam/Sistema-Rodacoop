@@ -14,7 +14,9 @@ module.exports = {
         references: {
           model: "pessoas",
           key: "id_pessoa"
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       acesso: {
         type: Sequelize.CHAR,

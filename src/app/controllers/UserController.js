@@ -50,7 +50,7 @@ class UserController {
       cpf: Yup.string().required().min(10),
     });
 
-    if (!(await schema.isValid(req.body) && isValidCPF(req.body.cpf))) {
+    if (!(await schema.isValid(req.body) || isValidCPF(req.body.cpf))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
@@ -63,11 +63,18 @@ class UserController {
     }
 
     if (cpfExists) {
-      return res.status(400).json({ error: 'CPF already exists' })
+      req.body.id_pessoa = cpfExists.id_pessoa
+      const {nome, cpf} = cpfExists
+      const { id_user, email, id_pessoa} = await User.create(req.body);
+      return res.status(200).json({ 
+        id_user,
+        id_pessoa,
+        nome,
+        cpf,
+        email, })
     }
     const { nome, cpf, id_pessoa } = await Pessoa.create(req.body);
     req.body.id_pessoa = id_pessoa
-    console.log(req.body)
     const { id_user, email} = await User.create(req.body);
     
 
