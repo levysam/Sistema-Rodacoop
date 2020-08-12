@@ -22,6 +22,8 @@ class Pessoa extends Model {
 
     return this;
   }
+
 }
 
 export default Pessoa;
+
