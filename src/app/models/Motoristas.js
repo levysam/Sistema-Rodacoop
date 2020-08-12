@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Motorista extends Model {
+class Motoristas extends Model {
 
   static init(sequelize) {
     super.init(
@@ -8,6 +8,7 @@ class Motorista extends Model {
         id_motorista: {
           type: Sequelize.INTEGER,
           primaryKey: true,
+          autoIncrement: true
         },
         id_pessoa: Sequelize.INTEGER,
         id_centro_distribuicao: Sequelize.INTEGER,
@@ -32,4 +33,4 @@ class Motorista extends Model {
   }
 }
 
-export default Motorista;
+export default Motoristas;

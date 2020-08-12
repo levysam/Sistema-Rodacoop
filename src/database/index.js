@@ -4,11 +4,11 @@ import User from '../app/models/User'
 import Pessoa from '../app/models/pessoa'
 import centro_distribuicao from '../app/models/centro_distribuicao'
 import forma_contratacao from '../app/models/forma_contratacao'
-import Motorista from '../app/models/Motorista'
+import Motoristas from '../app/models/Motoristas'
 
 import databaseConfig from '../config/database';
 
-const models = [User, Pessoa, centro_distribuicao, forma_contratacao, Motorista];
+const models = [User, Pessoa, centro_distribuicao, forma_contratacao, Motoristas];
 
 class Database {
   constructor() {

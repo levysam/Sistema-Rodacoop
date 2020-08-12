@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import Motorista from '../models/Motorista'
+import Motoristas from '../models/Motoristas'
 import Pessoa from '../models/pessoa'
 import isValidCpf from '../middlewares/isValidCpf'
 
@@ -12,7 +12,8 @@ class MotoristaController {
       nome: Yup.string().required(),
       cnh: Yup.string().required(),
       categoria: Yup.string().required(),
-      id_centro_distribuicao: Yup.number()
+      id_centro_distribuicao: Yup.number(),
+      id_forma_contratacao: Yup.number()
     });
 
     if (!(await schema.isValid(req.body)|| isValidCPF(req.body.cpf))) {
@@ -22,7 +23,8 @@ class MotoristaController {
 
     if(pessoaExists) {
       req.body.id_pessoa = pessoaExists.id_pessoa
-      const {id_motorista, id_pessoa, id_centro_distribuicao} = await Motorista.create(req.body)
+      const {id_motorista, id_pessoa, id_centro_distribuicao} = await Motoristas.create(req.body)
+      
       return res.json({
         id_motorista,
         id_pessoa,
@@ -31,7 +33,7 @@ class MotoristaController {
     }
     const { nome, cpf, id_pessoa } = await Pessoa.create(req.body);
     req.body.id_pessoa = id_pessoa
-    const {id_motorista, id_pessoa, id_centro_distribuicao} = await Motorista.create(req.body)
+    const {id_motorista, id_centro_distribuicao} = await Motoristas.create(req.body)
 
     return res.json({
       id_motorista,
