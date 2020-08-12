@@ -8,7 +8,7 @@ class forma_contratacao extends Model {
           type: Sequelize.INTEGER,
           PrimaryKey: true,
         },
-        forma_contratacao: Sequelize.STRING
+        tipo_contratacao: Sequelize.STRING
       },
       {
         sequelize,
