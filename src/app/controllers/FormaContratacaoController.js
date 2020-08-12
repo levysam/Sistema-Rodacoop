@@ -1,13 +1,11 @@
 import * as Yup from 'yup';
 
-import centro_distribuicao from '../models/forma_contratacao';
+import forma_contratacao from '../models/forma_contratacao';
 
-class CentroDistribuicaoController {
+class FormaContratacaoController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      identificador: Yup.string()
-        .required(),
-      uf: Yup.string()
+      tipo_contratacao: Yup.string()
         .required(),
     });
 
@@ -15,19 +13,18 @@ class CentroDistribuicaoController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const CentroDistribuicaoExists = await centro_distribuicao.findOne({ where: { identificador: req.body.identificador }});
+    const tipo_contratacaoExists = await forma_contratacao.findOne({ where: { tipo_contratacao }});
 
-    if (CentroDistribuicaoExists) {
-      return res.status(400).json({ error: 'Centro de Distribuicao already exists' })
+    if (tipo_contratacaoExists) {
+      return res.status(400).json({ error: 'tipo de contratação already exists' })
     }
 
-    const {id_centro_distribuicao, identificador, uf } = await centro_distribuicao.create(req.body);
+    const {id_forma_contratacao, tipo_contratacao } = await forma_contratacao.create(req.body);
     return res.json({
-      id_centro_distribuicao,
-      identificador,
-      uf
+      id_forma_contratacao,
+      tipo_contratacao
     });
   }
 }
 
-export default new CentroDistribuicaoController();
+export default new FormaContratacaoController();
