@@ -13,7 +13,7 @@ class FormaContratacaoController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const tipo_contratacaoExists = await forma_contratacao.findOne({ where: { tipo_contratacao }});
+    const tipo_contratacaoExists = await forma_contratacao.findOne({ where: { tipo_contratacao: req.body.tipo_contratacao }});
 
     if (tipo_contratacaoExists) {
       return res.status(400).json({ error: 'tipo de contratação already exists' })
