@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 
 import Motorista from '../models/Motorista'
 import Pessoa from '../models/pessoa'
-import authConfig from '../../config/auth'
 import isValidCpf from '../middlewares/isValidCpf'
 
 class MotoristaController {
