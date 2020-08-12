@@ -1,42 +1,45 @@
 import * as Yup from 'yup';
 
-import Motorista from '../models/Motorista';
-import authConfig from '../../config/auth';
+import Motorista from '../models/Motorista'
+import Pessoa from '../models/pessoa'
+import authConfig from '../../config/auth'
+import isValidCpf from '../middlewares/isValidCpf'
 
 class MotoristaController {
   async store(req, res) {
     const schema = Yup.object().shape({
       cpf: Yup.string()
-        .email()
         .required(),
-      password: Yup.string().required(),
+      nome: Yup.string().required(),
+      cnh: Yup.string().required(),
+      categoria: Yup.string().required(),
+      id_centro_distribuicao: Yup.number()
     });
 
-    if (!(await schema.isValid(req.body))) {
+    if (!(await schema.isValid(req.body)|| isValidCPF(req.body.cpf))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
-    const { email, password } = req.body;
+    const pessoaExists = await Pessoa.findOne({ where: { cpf: req.body.cpf }})
 
-    const user = await User.findOne({ where: { email } });
-
-    if (!user) {
-      return res.status(401).json({ error: 'User not found' });
+    if(pessoaExists) {
+      req.body.id_pessoa = pessoaExists.id_pessoa
+      const {id_motorista, id_pessoa, id_centro_distribuicao} = await Motorista.create(req.body)
+      return res.json({
+        id_motorista,
+        id_pessoa,
+        id_centro_distribuicao
+      })
     }
+    const { nome, cpf, id_pessoa } = await Pessoa.create(req.body);
+    req.body.id_pessoa = id_pessoa
+    const {id_motorista, id_pessoa, id_centro_distribuicao} = await Motorista.create(req.body)
 
-    if (!(await user.checkPassword(password))) {
-      return res.status(401).json({ error: 'Password does not match' });
-    }
-
-    const { id, name } = user;
     return res.json({
-      user: {
-        id,
-        name,
-        email,
-      },
-      token: jwt.sign({ id }, authConfig.secret, {
-        expiresIn: authConfig.expiresIn,
-      }),
+      id_motorista,
+      id_pessoa,
+      id_centro_distribuicao,
+      nome,
+      cpf
     });
   }
 }
