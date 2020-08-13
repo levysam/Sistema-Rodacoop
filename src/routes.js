@@ -5,6 +5,7 @@ import SessionController from './app/controllers/SessionController';
 import CentroDistribuicaoController from './app/controllers/CentroDistribuicaoController'
 import MotoristaController from './app/controllers/MotoristaController'
 import FormaContratacaoController from './app/controllers/FormaContratacaoController'
+import SituacaoController from './app/controllers/SituacaoController'
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -18,6 +19,7 @@ routes.use(authMiddleware);
 routes.post('/centro_distribuicao', CentroDistribuicaoController.store);
 routes.post('/forma_contratacao', FormaContratacaoController.store);
 routes.post('/Motoristas', MotoristaController.store);
+routes.post('/situacao_motorista', SituacaoController.store)
 routes.put('/users', UserController.update);
 
 export default routes;

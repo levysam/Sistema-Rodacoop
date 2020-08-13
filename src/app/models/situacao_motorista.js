@@ -1,16 +1,19 @@
 import Sequelize, { Model } from 'sequelize';
 
-class centro_distribuicao extends Model {
+class situacao_motorista extends Model {
   static init(sequelize) {
     super.init(
       {
-        id_centro_distribuicao: {
+        id_situacao_motorista: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true
         },
-        identificador: Sequelize.STRING,
-        uf: Sequelize.STRING
+        id_motorista: Sequelize.STRING,
+        justificativa: Sequelize.STRING,
+        inicio_periodo: Sequelize.DATE,
+        fim_periodo: Sequelize.DATE,
+        motivo: Sequelize.STRING()
       },
       {
         sequelize,
@@ -22,4 +25,4 @@ class centro_distribuicao extends Model {
 
 }
 
-export default centro_distribuicao;
+export default situacao_motorista;
