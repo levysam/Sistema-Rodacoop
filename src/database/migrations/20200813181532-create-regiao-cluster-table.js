@@ -14,6 +14,10 @@ module.exports = {
         type: Sequelize.CHAR(2),
         allowNull: false
       },
+      cluster:{
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
