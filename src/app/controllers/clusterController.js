@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 import regiao_cluster from '../models/regiao_cluster';
 
-class FormaContratacaoController {
+class cluster {
   async store(req, res) {
     const schema = Yup.object().shape({
       cluster: Yup.string()
@@ -16,9 +16,11 @@ class FormaContratacaoController {
     }
 
     const regiao_clusterExists = await regiao_cluster.findOne({ where: { cluster: req.body.cluster }});
-    regiao_clusterExists = await regiao_clusterExists.findOne({where: {uf: req.body.uf}})
     if (regiao_clusterExists) {
-      return res.status(400).json({ error: 'tipo de contratação already exists' })
+      regiao_clusterExists = await regiao_clusterExists.findOne({where: {uf: req.body.uf}})
+      if (regiao_clusterExists) {
+        return res.status(400).json({ error: 'tipo de contratação already exists' })
+      }
     }
 
     const {cluster, uf } = await regiao_cluster.create(req.body);
@@ -29,4 +31,4 @@ class FormaContratacaoController {
   }
 }
 
-export default new FormaContratacaoController();
+export default new cluster();
