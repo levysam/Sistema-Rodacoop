@@ -9,8 +9,8 @@ class regiao_cluster extends Model {
           primaryKey: true,
           autoIncrement: true
         },
-        id_motorista: Sequelize.STRING,
         cluster: Sequelize.STRING,
+        uf: Sequelize.STRING(2)
       },
       {
         sequelize,
