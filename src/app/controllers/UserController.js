@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import User from '../models/User';
 import Pessoa from '../models/pessoa';
 import isValidCPF from '../middlewares/isValidCpf';
+import quickstart from '../middlewares/convert_placa_to_string'
 
 class UserController {
   async store(req, res) {
@@ -19,6 +20,8 @@ class UserController {
     if (!(await schema.isValid(req.body) || isValidCPF(req.body.cpf))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
+
+    quickstart()
 
     const userExists = await User.findOne({ where: { email: req.body.email } });
 

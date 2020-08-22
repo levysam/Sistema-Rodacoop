@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-
 import regiao_cluster from '../models/regiao_cluster';
 
 class cluster {
