@@ -3,7 +3,7 @@ import User from '../models/User';
 import Pessoa from '../models/pessoa';
 import isValidCPF from '../middlewares/isValidCpf';
 import quickstart from '../middlewares/convert_placa_to_string'
-
+ 
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
