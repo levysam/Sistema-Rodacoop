@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable('rotas', {
-      id_rotas: {
+      id_rota: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
