@@ -9,7 +9,10 @@ class forma_contratacao extends Model {
           primaryKey: true,
           autoIncrement: true
         },
-        tipo_contratacao: Sequelize.STRING
+        tipo_contratacao: Sequelize.STRING,
+        id_user: {
+          type: Sequelize.INTEGER
+        }
       },
       {
         sequelize,

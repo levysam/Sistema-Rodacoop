@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 import User from '../models/User';
 import Pessoa from '../models/pessoa';
 import isValidCPF from '../middlewares/isValidCpf';
-import quickstart from '../middlewares/convert_placa_to_string'
  
 class UserController {
   async store(req, res) {
@@ -16,12 +15,10 @@ class UserController {
         .min(6),
       cpf: Yup.string().required().min(10),
     });
-
+    
     if (!(await schema.isValid(req.body) || isValidCPF(req.body.cpf))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
-
-    quickstart()
 
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
@@ -41,11 +38,12 @@ class UserController {
         nome,
         cpf,
         email, })
-    }
+    }else {
+    req.body.id_user_creator = req.userId
     const { nome, cpf, id_pessoa } = await Pessoa.create(req.body);
     req.body.id_pessoa = id_pessoa
     const { id_user, email} = await User.create(req.body);
-    
+  
 
     return res.json({
       id_user,
@@ -55,7 +53,7 @@ class UserController {
       email,
     });
   }
-
+  }
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),

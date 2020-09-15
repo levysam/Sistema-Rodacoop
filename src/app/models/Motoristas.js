@@ -12,7 +12,10 @@ class Motoristas extends Model {
         },
         id_pessoa: Sequelize.INTEGER,
         id_centro_distribuicao: Sequelize.INTEGER,
-        id_forma_contratacao: Sequelize.INTEGER
+        id_forma_contratacao: Sequelize.INTEGER,
+        id_user: {
+          type: Sequelize.INTEGER
+        }
       },
       {
         sequelize,

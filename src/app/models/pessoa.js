@@ -13,7 +13,10 @@ class Pessoa extends Model {
         cpf: Sequelize.STRING,
         identidade: Sequelize.STRING,
         orgaoExp: Sequelize.STRING,
-        dataNasc: Sequelize.DATE
+        dataNasc: Sequelize.DATE,
+        id_user_creator: {
+          type: Sequelize.INTEGER
+        }
       },
       {
         sequelize,

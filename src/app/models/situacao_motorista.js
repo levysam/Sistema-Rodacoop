@@ -13,7 +13,10 @@ class situacao_motorista extends Model {
         justificativa: Sequelize.STRING,
         inicio_periodo: Sequelize.DATE,
         fim_periodo: Sequelize.DATE,
-        motivo: Sequelize.STRING()
+        motivo: Sequelize.STRING(),
+        id_user: {
+          type: Sequelize.INTEGER
+        }
       },
       {
         sequelize,

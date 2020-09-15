@@ -10,7 +10,10 @@ class centro_distribuicao extends Model {
           autoIncrement: true
         },
         identificador: Sequelize.STRING,
-        uf: Sequelize.STRING
+        uf: Sequelize.STRING,
+        id_user: {
+          type: Sequelize.INTEGER
+        }
       },
       {
         sequelize,

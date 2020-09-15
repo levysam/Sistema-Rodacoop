@@ -10,7 +10,10 @@ class regiao_cluster extends Model {
           autoIncrement: true
         },
         cluster: Sequelize.STRING,
-        uf: Sequelize.STRING(2)
+        uf: Sequelize.STRING(2),
+        id_user: {
+          type: Sequelize.INTEGER
+        }
       },
       {
         sequelize,

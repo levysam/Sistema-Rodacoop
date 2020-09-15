@@ -20,12 +20,13 @@ class CentroDistribuicaoController {
     if (CentroDistribuicaoExists) {
       return res.status(400).json({ error: 'Centro de Distribuicao already exists' })
     }
-
-    const {id_centro_distribuicao, identificador, uf } = await centro_distribuicao.create(req.body);
+    req.body.id_user = req.userId
+    const {id_centro_distribuicao, identificador, uf, id_user } = await centro_distribuicao.create(req.body);
     return res.json({
       id_centro_distribuicao,
       identificador,
-      uf
+      uf,
+      id_user
     });
   }
 }

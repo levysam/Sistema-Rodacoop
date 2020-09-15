@@ -18,11 +18,12 @@ class FormaContratacaoController {
     if (tipo_contratacaoExists) {
       return res.status(400).json({ error: 'tipo de contratação already exists' })
     }
-
-    const {id_forma_contratacao, tipo_contratacao } = await forma_contratacao.create(req.body);
+    req.body.id_user = req.userId
+    const {id_forma_contratacao, tipo_contratacao, id_user } = await forma_contratacao.create(req.body);
     return res.json({
       id_forma_contratacao,
-      tipo_contratacao
+      tipo_contratacao,
+      id_user
     });
   }
 }

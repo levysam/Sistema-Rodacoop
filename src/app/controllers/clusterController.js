@@ -21,11 +21,12 @@ class cluster {
         return res.status(400).json({ error: 'tipo de contratação already exists' })
       }
     }
-
-    const {cluster, uf } = await regiao_cluster.create(req.body);
+    req.body.id_user = req.userId
+    const {cluster, uf, id_user } = await regiao_cluster.create(req.body);
     return res.json({
       cluster,
-      uf
+      uf,
+      id_user
     });
   }
 }

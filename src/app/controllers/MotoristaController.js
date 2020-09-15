@@ -23,12 +23,14 @@ class MotoristaController {
 
     if(pessoaExists) {
       req.body.id_pessoa = pessoaExists.id_pessoa
-      const {id_motorista, id_pessoa, id_centro_distribuicao} = await Motoristas.create(req.body)
+      req.body.id_user = req.userId
+      const {id_motorista, id_pessoa, id_centro_distribuicao, id_user} = await Motoristas.create(req.body)
       
       return res.json({
         id_motorista,
         id_pessoa,
-        id_centro_distribuicao
+        id_centro_distribuicao,
+        id_user
       })
     }
     const { nome, cpf, id_pessoa } = await Pessoa.create(req.body);
